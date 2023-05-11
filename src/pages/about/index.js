@@ -46,9 +46,22 @@ export default function AboutMe({ skills }) {
 }
 
 export async function getStaticProps() {
+
+    let skills = [];
+
+    try {
+        const response = await fetch("https://hector-firebase-c154b-default-rtdb.firebaseio.com/skills.json");
+        const data = await response.json();
+
+        skills = data.split(",");
+    } catch (error) {
+        console.error(error);
+    }
+
     return {
         props: {
-            skills: ["Java", "React", "Next.js", "Kotlin", "C/C++", "JavaScript", "Street Fighter 6"]
+            skills,
         },
+        revalidate: 30,
     };
 }
