@@ -16,6 +16,12 @@ export default function AddNewProjectModal({ open, onClose, onSubmit }) {
                 />
             </DialogContent>
             <DialogActions>
+            <Button
+                variant="contained"
+                type="onSubmit"
+                form='project-form'>
+                Add Project    
+                 </Button>
                 <Button
                 variant="contained"
                 color="error"

@@ -25,6 +25,14 @@ export default function Admin() {
           console.log(error);
         }
       };
+
+     const onHandleSubmit = values => {
+        console.log(values);
+        setProjects(prev => [
+            ... prev,
+            { ...values, _id: projects.length + 1}]
+        )
+     }
   
     return (
         <section>
@@ -51,6 +59,7 @@ export default function Admin() {
             <AddNewProjectModal 
                 open= { isNewProjectModaVisible }
                 onClose={ () => setIsNewProjectModalVisible(false) }
+                onSubmit={ onHandleSubmit }
             />
 
         </section>
