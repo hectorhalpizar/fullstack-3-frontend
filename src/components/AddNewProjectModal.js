@@ -1,7 +1,7 @@
-import { Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import ProjectFrom from "./forms/ProjectForm.js";
 
-export default function AddNewProjectModal({ open, onClose }) {
+export default function AddNewProjectModal({ open, onClose, onSubmit }) {
     return(
         <Dialog
             open={open}
@@ -11,9 +11,18 @@ export default function AddNewProjectModal({ open, onClose }) {
                 Adding new Project
             </DialogTitle>
             <DialogContent>
-                <ProjectFrom />
+                <ProjectFrom 
+                    onSubmit={onSubmit}
+                />
             </DialogContent>
             <DialogActions>
+                <Button
+                variant="contained"
+                color="error"
+                type="reset"
+                form='project-form'
+                 >Clear form
+                 </Button>
             </DialogActions>
         </Dialog>
     );

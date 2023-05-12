@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
 
-export default function ProjectFrom ({}) {
+export default function ProjectFrom ({ onSubmit }) {
 
     const defaultValues = {
         name: "",
@@ -42,7 +42,7 @@ export default function ProjectFrom ({}) {
         imageUrl: yup.string(),
     });
 
-    const { control, watch } = useForm({
+    const { control, watch, reset, handleSubmit } = useForm({
             defaultValues,
             resolver: yupResolver(projectFormSchema),
             mode: 'all'
@@ -51,7 +51,12 @@ export default function ProjectFrom ({}) {
     const imageUrlValue = watch('imageUrl');
 
         return (
-            <form>
+            <form 
+              id='project-form'
+              onReset={() =>  reset(defaultValues)}
+              onSubmit={handleSubmit(onSubmit)}
+              style={{padding: '24px'}}
+            >
               <Grid container spacing={ 4 }>
                 <Grid item xs={8}>
                   <Controller
