@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 export default function Admin() {
 
     const [projects, setProjects] = useState([])
-    const [isNewProjectModaVisible, setIsNewPorjectModalVisible] = useState(false)
+    const [isNewProjectModaVisible, setIsNewProjectModalVisible] = useState(false)
 
     useEffect(() => {
         fetchProjects();
@@ -38,7 +38,7 @@ export default function Admin() {
                 <Button
                     variant="contained"
                     size="large"
-                    onClick={ () => setIsNewPorjectModalVisible(true) }
+                    onClick={ () => setIsNewProjectModalVisible(true) }
                 >Add Project</Button>
 
             </div>
@@ -50,6 +50,7 @@ export default function Admin() {
 
             <AddNewProjectModal 
                 open= { isNewProjectModaVisible }
+                onClose={ () => setIsNewProjectModalVisible(false) }
             />
 
         </section>
