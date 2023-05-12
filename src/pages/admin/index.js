@@ -18,7 +18,7 @@ export default function Admin() {
     
       const fetchProjects = async () => {
         try {
-          const response = await fetch("http://localhost:3000/api/projects");
+          const response = await fetch("http://172.31.16.138:3000/api/projects");
           const responseJson = await response.json();
           setProjects(responseJson);
         } catch (error) {
