@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
-import Image from 'next/image';
 
 export default function ProjectItem({ project }) {
   const router = useRouter();
@@ -11,11 +10,10 @@ export default function ProjectItem({ project }) {
   return (
     <Grid container spacing={6} sx={{ pb: "40px" }}>
       <Grid item md={6}>
-        <Image
+        <img
           src={project.imageUrl}
           alt={project.name}
-          width={500}
-          height={300}
+          style={{ width: "100%" }}
         />
       </Grid>
       <Grid item md={6}>
