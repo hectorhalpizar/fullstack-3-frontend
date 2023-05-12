@@ -23,7 +23,7 @@ export default function ProjectFrom ({}) {
     const fetchSkills = async () => {
         try {
           const response = await fetch(
-            "https://mike-skills-api-123123-default-rtdb.firebaseio.com/skills.json"
+            "https://hector-firebase-c154b-default-rtdb.firebaseio.com/skills.json"
           );
           const data = await response.json();
           const skillsArray = data.split(",");
