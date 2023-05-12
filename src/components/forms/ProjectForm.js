@@ -42,11 +42,13 @@ export default function ProjectFrom ({}) {
         imageUrl: yup.string(),
     });
 
-    const { control } = useForm({
+    const { control, watch } = useForm({
             defaultValues,
             resolver: yupResolver(projectFormSchema),
             mode: 'all'
         });
+
+    const imageUrlValue = watch('imageUrl');
 
         return (
             <form>
@@ -139,6 +141,30 @@ export default function ProjectFrom ({}) {
                     )}
                   />
                 </Grid>
+                <Grid item xs={8}>
+                  <Controller
+                    control={ control }
+                    name='imageUrl'
+                    render={ ({ field, fieldState }) => (
+                      <TextField
+                        { ...field }
+                        label='URL Image'
+                        variant='outlined'
+                        fullWidth
+                        error={ !!fieldState.error }
+                        helperText={ fieldState.error?.message }
+                      />
+                    )}
+                  />
+                </Grid>
+                {
+                  imageUrlValue &&
+                  <Grid item xs={12}>
+                    <img src={imageUrlValue} 
+                          alt='project-image'
+                    />
+                  </Grid>
+                }
               </Grid>
             </form>
           )
