@@ -10,19 +10,19 @@ export default function Admin() {
 
     const [projects, setProjects] = useState([]);
 
-    const fetchProjects = async () => {
-        try {
-            const response = await fetch("http://localhost:3000/api/projects");
-            const responseJson = response.json();
-            setProjects(responseJson);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-        
     useEffect(() => {
-        fetchProjects()
-    }, [])
+        fetchProjects();
+      }, []);
+    
+      const fetchProjects = async () => {
+        try {
+          const response = await fetch("http://localhost:3000/api/projects");
+          const responseJson = await response.json();
+          setProjects(responseJson);
+        } catch (error) {
+          console.log(error);
+        }
+      };
   
     return (
         <section>
