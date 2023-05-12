@@ -1,3 +1,4 @@
+import AddNewProjectModal from "@/components/AddNewProjectModal";
 import PageDescription from "@/components/PageDescription";
 
 import ProjectItem from "@/components/ProjectItem";
@@ -8,7 +9,8 @@ import { useEffect, useState } from "react";
 
 export default function Admin() {
 
-    const [projects, setProjects] = useState([]);
+    const [projects, setProjects] = useState([])
+    const [isNewProjectModaVisible, setIsNewPorjectModalVisible] = useState(false)
 
     useEffect(() => {
         fetchProjects();
@@ -36,10 +38,19 @@ export default function Admin() {
                 <Button
                     variant="contained"
                     size="large"
+                    onClick={ () => setIsNewPorjectModalVisible(true) }
                 >Add Project</Button>
 
-                { projects.map(project => <ProjectItem key={project.id} project={project} />) }
             </div>
+
+            {projects.map((project) => (
+                    <ProjectItem key={project.id} project={project} />
+                ))}
+
+
+            <AddNewProjectModal 
+                open= { isNewProjectModaVisible }
+            />
 
         </section>
     );
