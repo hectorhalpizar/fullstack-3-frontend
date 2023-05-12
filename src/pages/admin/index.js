@@ -32,6 +32,7 @@ export default function Admin() {
             ... prev,
             { ...values, _id: projects.length + 1}]
         )
+        setIsNewProjectModalVisible(false)
      }
   
     return (
