@@ -1,4 +1,6 @@
-import AddNewProjectModal from "@/components/modal/AddNewProjectModal";
+import AddNewProjectModal from "@/components/modals/AddNewProjectModal";
+import EditProjectModal from "@/components/modals/EditProjectModal";
+
 import PageDescription from "@/components/PageDescription";
 
 import ProjectItem from "@/components/ProjectItem";
@@ -9,6 +11,7 @@ import { useEffect, useState } from "react";
 
 export default function Admin() {
 
+    const [editProject, setEditProject] = useState()
     const [projects, setProjects] = useState([])
     const [isNewProjectModaVisible, setIsNewProjectModalVisible] = useState(false)
 
@@ -26,14 +29,20 @@ export default function Admin() {
         }
       };
 
-     const onHandleSubmit = values => {
-        console.log(values);
-        setProjects(prev => [
-            ... prev,
-            { ...values, _id: projects.length + 1}]
-        )
-        setIsNewProjectModalVisible(false)
-     }
+      const handleOnSubmit = values => {
+        const tempProjects = Array.from(projects)
+        if (!!values._id) {
+          const projectIndex = tempProjects.findIndex(p => p._id === values._id)
+          tempProjects[projectIndex] = values;
+        }
+        else {
+          tempProjects.push({
+            ...values,
+            _id: projects.length + 1,
+          })
+        }
+        setProjects(tempProjects)
+      }
   
     return (
         <section>
@@ -60,7 +69,14 @@ export default function Admin() {
             <AddNewProjectModal 
                 open= { isNewProjectModaVisible }
                 onClose={ () => setIsNewProjectModalVisible(false) }
-                onSubmit={ onHandleSubmit }
+                onSubmit={ handleOnSubmit }
+            />
+
+            <EditProjectModal
+                open={ !!editProject }
+                onClose={ () => setEditProject() }
+                onSubmit={ handleOnSubmit }
+                project={ editProject }
             />
 
         </section>
