@@ -16,10 +16,10 @@ function Project({ project }) {
                 </Button>
             </Box>
 
-            <Box>
+            <Box textAlign="center">
                 <img
                     src={project.imageUrl}
-
+                    width="60%"
                 >
                 </img>        
             </Box>
@@ -45,21 +45,58 @@ function Project({ project }) {
     </>);
 }
 
-export async function getServerSideProps(context) {
-    const id = context.params.id;
+// export async function getServerSideProps(context) {
+//     const id = context.params.id;
     
+//     try {
+//         const response = await fetch(`http://172.31.16.138:3000/api/projects/${id}`);
+//         const project = await response.json();
+//         console.log("Project " + project);
+//         return {
+//             props: {
+//                 project,
+//             },
+//         }
+//     }  catch (error) {
+//         console.error(error);
+//     }
+// }
+
+export async function getStaticPaths() {
+
     try {
-        const response = await fetch(`http://172.31.16.138:3000/api/projects/${id}`);
+        const response = await fetch(`http://172.31.16.138:3000/api/projects/`);
+        const projects = await response.json();
+        const paths = projects.map((project) => {
+            return { params: { id: project._id.toString() } }
+        });
+
+        return {
+            paths,
+            fallback: "blocking",
+        };
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function getStaticProps({ params }) {
+    try {
+        const response = await fetch(`http://172.31.16.138:3000/api/projects/${params.id}`);
+
         const project = await response.json();
-        console.log("Project " + project);
+
         return {
             props: {
                 project,
             },
-        }
-    }  catch (error) {
-        console.error(error);
+            revalidate: 5,
+        };
+    } catch (error) {
+        return { notFound: true };
     }
 }
+
 
 export default Project;
