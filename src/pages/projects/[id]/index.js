@@ -2,6 +2,7 @@ import { Button, Box, Grid } from "@mui/material";
 import PageDescription from "@/components/PageDescription";
 import { Chip } from "@mui/material";
 import Image from 'next/image';
+import Link from "next/link";
 
 function Project({ project }) {
     return (<>
@@ -42,7 +43,13 @@ function Project({ project }) {
                     </Stack>
 
             </Box> */}
-
+            <Link href='/projects'>
+            <Box textAlign="center">
+                <Button variant="contained" size="large">
+                    Go Back
+                </Button>
+            </Box>
+            </Link>
         </Grid>
     </>);
 }
