@@ -1,4 +1,4 @@
-import AddNewProjectModal from "@/components/AddNewProjectModal";
+import AddNewProjectModal from "@/components/modal/AddNewProjectModal";
 import PageDescription from "@/components/PageDescription";
 
 import ProjectItem from "@/components/ProjectItem";

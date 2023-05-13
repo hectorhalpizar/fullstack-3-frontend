@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
-import ProjectFrom from "./forms/ProjectForm.js";
+import ProjectFrom from "../forms/ProjectForm.js";
 
 export default function AddNewProjectModal({ open, onClose, onSubmit }) {
     return(
