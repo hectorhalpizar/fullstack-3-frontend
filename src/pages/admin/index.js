@@ -32,10 +32,12 @@ export default function Admin() {
       const handleOnSubmit = values => {
         const tempProjects = Array.from(projects)
         if (!!values._id) {
-          const projectIndex = tempProjects.findIndex(p => p._id === values._id)
+          console.log("Project". values);
+          const projectIndex = tempProjects.findIndex(p => p._id === values._id);
           tempProjects[projectIndex] = values;
         }
         else {
+          console.log("New Project");
           tempProjects.push({
             ...values,
             _id: projects.length + 1,
@@ -43,6 +45,9 @@ export default function Admin() {
         }
         setProjects(tempProjects)
       }
+
+      const handleDelete = id =>
+      setProjects(prev => prev.filter(p => p._id !== id))
   
     return (
         <section>
@@ -62,8 +67,13 @@ export default function Admin() {
             </div>
 
             {projects.map((project) => (
-                    <ProjectItem key={project.id} project={project} />
-                ))}
+                <ProjectItem
+                key={project._id}
+                project={project}
+                handleDelete={() => handleDelete(project._id)}
+                handleEdit={() => setEditProject(project)}
+                />
+            ))}
 
 
             <AddNewProjectModal 
