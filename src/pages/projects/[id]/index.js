@@ -1,6 +1,7 @@
 import { Button, Box, Grid } from "@mui/material";
 import PageDescription from "@/components/PageDescription";
 import { Chip } from "@mui/material";
+import Image from 'next/image';
 
 function Project({ project }) {
     return (<>
@@ -17,11 +18,12 @@ function Project({ project }) {
             </Box>
 
             <Box textAlign="center">
-                <img
+                <Image
                     src={project.imageUrl}
-                    width="60%"
-                >
-                </img>        
+                    alt={project.name}
+                    width={900}
+                    height={550}
+                />        
             </Box>
 
             <h1>Project Overview</h1>
